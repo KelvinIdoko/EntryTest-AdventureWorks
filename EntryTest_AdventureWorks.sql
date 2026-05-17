@@ -144,13 +144,6 @@ GO
 
 USE AdventureWorks2022;
 GO
-
--- =========================================
--- Clear existing customers
--- =========================================
-DELETE FROM EntryTest.CustomerMini;
-GO
-
 -- =========================================
 -- Insert customers that EXIST in OrderMini
 -- This guarantees JOIN results
@@ -330,4 +323,31 @@ INNER JOIN EntryTest.OrderMini o
     ON c.CustomerID = o.CustomerID
 GROUP BY c.CustomerID
 ORDER BY TotalSpent DESC;
+GO
+
+-- =========================================
+-- VERIFICATION CHECKS
+-- =========================================
+
+-- Check customer count
+SELECT COUNT(*) AS CustomerCount
+FROM EntryTest.CustomerMini;
+
+-- Check order count
+SELECT COUNT(*) AS OrderCount
+FROM EntryTest.OrderMini;
+
+-- Check order item count
+SELECT COUNT(*) AS OrderItemCount
+FROM EntryTest.OrderItemMini;
+
+-- Verify FK integrity
+SELECT TOP 10 *
+FROM EntryTest.OrderItemMini;
+
+SELECT TOP 10 *
+FROM EntryTest.OrderMini;
+
+SELECT TOP 10 *
+FROM EntryTest.CustomerMini;
 GO
